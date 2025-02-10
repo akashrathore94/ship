@@ -2,8 +2,8 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const initialState = [
   { id: 1, name: "Music", active: false },
-  { id: 2, name: "Fold", active: false },
-  { id: 3, name: "ABC", active: false },
+  { id: 2, name: "Pictures", active: false },
+  { id: 3, name: "Files", active: false },
 ];
 
 export const finderSlice = createSlice({

@@ -2,13 +2,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .selected img {
-  background: gray;
+  background: #363633;
 }
 
 .selected p {
-  background: blue;
+  background: #0158d0;
   border-radius: 5px;
+  width: fit-content;
+  margin: auto;
 }
