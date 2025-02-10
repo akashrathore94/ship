@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.selected img {
+  background: gray;
+}
+
+.selected p {
+  background: blue;
+  border-radius: 5px;
+}
