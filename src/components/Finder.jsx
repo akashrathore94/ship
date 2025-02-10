@@ -1,79 +1,72 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { add, addActive, remove } from "../redux/slices/finder";
-import img from "../assets/image.png";
+import { addActive, removeActive } from "../redux/slices/finder";
 
 import styled from "styled-components";
-import { useState } from "react";
+
 import Tooltip from "./Tooltip";
+import Folder from "./Folder";
 
 const FinderContainer = styled.div`
   padding: 40px 30px;
   height: 100%;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: start;
 `;
 
 function Finder() {
   const state = useSelector((state) => state.finder);
-  console.log(state);
   const dispatch = useDispatch();
 
   const [tooltip, setTooltip] = useState(null);
+  const [removeTooltip, setRemoveTooltip] = useState(null);
 
   function handleRightClick(e) {
     e.preventDefault();
-    console.log("parent right click");
+
+    setTooltip({
+      x: e.clientX,
+      y: e.clientY,
+    });
+    setRemoveTooltip(0);
+  }
+
+  function handleChildRightClick(e, el) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    dispatch(addActive(el.id));
+
+    setRemoveTooltip(el.id);
     setTooltip({
       x: e.clientX,
       y: e.clientY,
     });
   }
 
-  function handleChildRightClick(e, el) {
-    e.preventDefault();
-    e.stopPropagation();
-    console.log(el);
-    dispatch(addActive(el.id));
-    console.log("child right click");
+  function handleClick(e) {
+    if (!e.target.closest(".folder")) dispatch(removeActive());
   }
+
   return (
-    <FinderContainer onContextMenu={handleRightClick}>
-      <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
-        <div
-          onClick={() => {
-            dispatch(remove(1));
-          }}
-        >
-          Delete
-        </div>
-        <div
-          onClick={() => {
-            dispatch(add());
-          }}
-        >
-          Add
-        </div>
-        {state.map((el, i) => (
-          <div
-            key={i}
-            onClick={() => dispatch(addActive(el.id))}
-            className={`${el.active ? "selected" : ""}`}
-            onContextMenu={(e) => handleChildRightClick(e, el)}
-            style={{ textAlign: "center", width: "100px" }}
-          >
-            <img
-              style={{
-                width: "60px",
-                padding: "8px 4px",
-                borderRadius: "5px",
-              }}
-              src={img}
-            />
-            <p style={{ padding: "2px 4px" }}>{el.name}</p>
-          </div>
-        ))}
-      </div>
+    <FinderContainer onContextMenu={handleRightClick} onClick={handleClick}>
+      {state.map((el) => (
+        <Folder
+          key={el.id}
+          el={el}
+          handleChildRightClick={handleChildRightClick}
+        />
+      ))}
 
       {tooltip && (
-        <Tooltip yCord={tooltip.y} xCord={tooltip.x} setTooltip={setTooltip} />
+        <Tooltip
+          yCord={tooltip.y}
+          xCord={tooltip.x}
+          setTooltip={setTooltip}
+          removeTooltip={removeTooltip}
+        />
       )}
     </FinderContainer>
   );

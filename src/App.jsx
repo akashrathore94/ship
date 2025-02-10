@@ -1,5 +1,6 @@
 import LeftPanel from "./components/LeftPanel";
 import RightPanel from "./components/RightPanel";
+
 import styled from "styled-components";
 
 const Main = styled.main`

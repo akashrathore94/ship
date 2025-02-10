@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { add, remove } from "../redux/slices/finder";
 
 const TooltipContainer = styled.div`
   padding: 5px;
@@ -8,9 +10,33 @@ const TooltipContainer = styled.div`
   border-radius: 10px;
   width: 200px;
   font-size: 14px;
+  background: #242527;
 `;
 
-function Tooltip({ yCord, xCord, setTooltip }) {
+const NewFolderContainer = styled.div`
+  padding: 8px 10px;
+  cursor: pointer;
+  margin-bottom: 5px;
+  border-radius: 5px;
+
+  &: hover {
+    background-color: #3498db;
+    borderradius: 5px;
+  }
+`;
+
+const BorderDiv = styled.div`
+  border-bottom: 1px solid #4f4f4e;
+  margin: 5px 0;
+`;
+
+const OtherDiv = styled.div`
+  padding: 8px 10px;
+`;
+
+function Tooltip({ yCord, xCord, setTooltip, removeTooltip }) {
+  const dispatch = useDispatch();
+
   const tooltipRef = useRef(null);
 
   const handleClickOutside = useCallback(
@@ -30,56 +56,38 @@ function Tooltip({ yCord, xCord, setTooltip }) {
   return (
     <TooltipContainer
       ref={tooltipRef}
-      className="absolute bg-white shadow-md border rounded p-2"
       style={{ top: yCord, left: xCord }}
+      onClick={() => setTooltip(null)}
     >
-      <div
-        style={{
-          padding: "8px 10px",
-          cursor: "pointer",
-          marginBottom: "5px",
-          borderRadius: "5px",
-        }}
-      >
-        New Folder
-      </div>
-      <div style={{ borderBottom: "1px solid #4f4f4e", margin: "5px 0" }}></div>
-      <div
-        style={{
-          padding: "8px 10px",
-          marginBottom: "5px",
-          borderRadius: "5px",
-        }}
-      >
-        Get Info
-      </div>
-      <div style={{ borderBottom: "1px solid #4f4f4e", margin: "5px 0" }}></div>
-      <div
-        style={{
-          padding: "8px 10px",
-          borderRadius: "5px",
-        }}
-      >
-        View
-      </div>
+      {removeTooltip !== 0 ? (
+        <NewFolderContainer
+          onClick={() => {
+            setTooltip(null);
+            dispatch(remove(removeTooltip));
+          }}
+        >
+          Remove
+        </NewFolderContainer>
+      ) : (
+        <NewFolderContainer
+          onClick={() => {
+            setTooltip(null);
+            dispatch(add());
+          }}
+        >
+          New Folder
+        </NewFolderContainer>
+      )}
 
-      <div
-        style={{
-          padding: "8px 10px",
-          borderRadius: "5px",
-        }}
-      >
-        Sort by
-      </div>
+      <BorderDiv />
 
-      <div
-        style={{
-          padding: "8px 10px",
-          borderRadius: "5px",
-        }}
-      >
-        Use Groups
-      </div>
+      <OtherDiv>Get Info</OtherDiv>
+
+      <BorderDiv />
+
+      <OtherDiv>View</OtherDiv>
+      <OtherDiv>Sort by</OtherDiv>
+      <OtherDiv>Use Groups</OtherDiv>
     </TooltipContainer>
   );
 }

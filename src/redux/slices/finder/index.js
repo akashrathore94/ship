@@ -24,9 +24,14 @@ export const finderSlice = createSlice({
           : { ...el, active: true }
       );
     },
+    removeActive: (state) => {
+      return state.map((el) => {
+        return { ...el, active: false };
+      });
+    },
   },
 });
 
-export const { add, remove, addActive } = finderSlice.actions;
+export const { add, remove, addActive, removeActive } = finderSlice.actions;
 
 export default finderSlice.reducer;
