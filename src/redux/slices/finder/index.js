@@ -29,9 +29,13 @@ export const finderSlice = createSlice({
         return { ...el, active: false };
       });
     },
+    updateOrder: (state, action) => {
+      return action.payload;
+    },
   },
 });
 
-export const { add, remove, addActive, removeActive } = finderSlice.actions;
+export const { add, remove, addActive, removeActive, updateOrder } =
+  finderSlice.actions;
 
 export default finderSlice.reducer;

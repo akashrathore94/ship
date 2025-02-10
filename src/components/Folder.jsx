@@ -7,7 +7,7 @@ function Folder({ el, handleChildRightClick }) {
 
   return (
     <div
-      onClick={() => dispatch(addActive(el.id))}
+      onMouseDown={() => dispatch(addActive(el.id))}
       className={`folder ${el.active ? "selected" : ""}`}
       onContextMenu={(e) => handleChildRightClick(e, el)}
       style={{ textAlign: "center", width: "100px" }}
@@ -17,6 +17,7 @@ function Folder({ el, handleChildRightClick }) {
           width: "60px",
           padding: "8px 4px",
           borderRadius: "5px",
+          pointerEvents: "none",
         }}
         src={img}
       />
