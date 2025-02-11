@@ -1,6 +1,7 @@
 import Finder from "./Finder";
 
 import styled from "styled-components";
+import Header from "./Header";
 
 const StyledRightPanel = styled.section`
   min-height: 100vh;
@@ -12,7 +13,7 @@ const StyledRightPanel = styled.section`
 function RightPanel() {
   return (
     <StyledRightPanel>
-      <nav></nav>
+      <Header></Header>
       <Finder />
     </StyledRightPanel>
   );

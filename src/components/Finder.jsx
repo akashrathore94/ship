@@ -20,7 +20,6 @@ const FinderContainer = styled.div`
 
 function Finder() {
   const state = useSelector((state) => state.finder);
-  console.log(state);
   const dispatch = useDispatch();
 
   const [tooltip, setTooltip] = useState(null);
@@ -63,7 +62,7 @@ function Finder() {
         axis="x"
         values={state}
         onReorder={handleReorder}
-        style={{ display: "flex" }}
+        style={{ display: "flex", flexWrap: "wrap" }}
       >
         {state.map((el) => (
           <Reorder.Item value={el} key={el.id} style={{ listStyle: "none" }}>

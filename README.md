@@ -1,8 +1,10 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project tries to copy the UI & Functionality of finder in macOS.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. You can right click on the right panel and create a new folder
+2. Right click on any folder on the screen and select remove to delete the folder
+3. You can drag the folders to rearrange them as well
+4. clicking on any folder selects the folder
+5. if any folder is selected and you click else where on the screen it deselects the item
+6. if any item is selected and you create a new folder, it gets selected automatically
