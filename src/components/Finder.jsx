@@ -11,7 +11,7 @@ import { Reorder } from "framer-motion";
 
 const FinderContainer = styled.div`
   padding: 40px 30px;
-  height: 100%;
+  height: calc(100% - 40px);
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
